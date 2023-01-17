@@ -1,5 +1,5 @@
 import React from 'react'
-export function App(){
+export default function App(){
   interface Props {
   name: string;
   age: number;
@@ -22,17 +22,15 @@ class MyComponent extends React.Component<Props, State> {
       }));
       this.props.onClick();
   }
-
-  render() 
-      return (
-          <div>
-              <h1>Hello, {this.props.name}!</h1>
-              <p>You are {this.props.age} years old.</p>
-              <button onClick={this.handleClick}>
-                  {this.state.isOpen ? "Close" : "Open"}
-              </button>
-          </div>
-      );
+  render(){
+    return <div>
+      <h1>Hello, {this.props.name}!</h1>
+      <p>You are {this.props.age} years old.</p>
+      <button onClick={this.handleClick}>
+        {this.state.isOpen ? "Close" : "Open"}
+      </button>
+    </div>;
   }
-}
+  }
+
 }
