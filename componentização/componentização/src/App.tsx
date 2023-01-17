@@ -1,36 +1,39 @@
-import React from 'react'
-export default function App(){
-  interface Props {
-  name: string;
-  age: number;
-  onClick: () => void;
+import * as React from "react";
+import { TodoList } from "./todolist";
+
+interface Todo {
+    text: string;
+    isCompleted: boolean;
 }
 
 interface State {
-  isOpen: boolean;
+    todos: Todo[];
 }
 
-class MyComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
-      super(props);
-      this.state = { isOpen: false };
-  }
+export class App extends React.Component<{}, State> {
+    constructor(props: {}) {
+        super(props);
+        this.state = {
+            todos: [
+                { text: "Learn React", isCompleted: true },
+                { text: "Learn TypeScript", isCompleted: false },
+                { text: "Build an app", isCompleted: false }
+            ]
+        };
+    }
 
-  handleClick = () => {
-      this.setState(prevState => ({
-          isOpen: !prevState.isOpen
-      }));
-      this.props.onClick();
-  }
-  render(){
-    return <div>
-      <h1>Hello, {this.props.name}!</h1>
-      <p>You are {this.props.age} years old.</p>
-      <button onClick={this.handleClick}>
-        {this.state.isOpen ? "Close" : "Open"}
-      </button>
-    </div>;
-  }
-  }
+    handleTodoClick = (index: number) => {
+        const todos = [...this.state.todos];
+        todos[index].isCompleted = !todos[index].isCompleted;
+        this.setState({ todos });
+    }
 
+    render() {
+        return (
+            <div>
+                <h1>Todo List</h1>
+                <TodoList todos={this.state.todos} onTodoClick={this.handleTodoClick} />
+            </div>
+        );
+    }
 }
