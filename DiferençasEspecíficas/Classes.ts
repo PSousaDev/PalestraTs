@@ -15,5 +15,5 @@ class Person {
 const john = new Person("John Doe", 30);
 john.sayHello();  // Output: "Hello, my name is John Doe"
 
-//js
+
 
